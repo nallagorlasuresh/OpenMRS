@@ -3,7 +3,7 @@
     become: yes
     hosts: all
     vars:
-      - mysql.username: mysql
+      - mysql_username: mysql
     tasks:
     - name: Run the equivalent of "apt-get update" as a separate step
       apt:
@@ -14,5 +14,5 @@
         state: present
     - name: Creating MYSQL group
       group:
-        name: "{{ mysql.username }}"
+        name: "{{ mysql_username }}"
         state: present
