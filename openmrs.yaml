@@ -42,7 +42,7 @@
         state: directory
         recurse: yes
         group: mysql
-        user: mysql
+        owner: mysql
         mode: '0766'
     - name: Install dependencies
       apt:
