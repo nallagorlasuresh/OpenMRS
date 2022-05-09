@@ -1,0 +1,12 @@
+---
+  - name: install nop commerce
+    become: yes
+    hosts: all
+    tasks:
+    - name: Run the equivalent of "apt-get update" as a separate step
+      apt:
+        update_cache: yes
+    - name: Install openjdk-8-jdk
+      apt:
+        name: openjdk-8-jdk
+        state: present
