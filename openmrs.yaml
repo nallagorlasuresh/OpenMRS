@@ -54,6 +54,6 @@
         - libnuma-dev
     - name: Run mysql command
       command:
-        chdir: "{{ mysql_home_directory }}/scripts"
+        chdir: "{{ mysql_home_directory }}/mysql-5.6.46-linux-glibc2.12-x86_64/scripts"
         cmd: mysql_install_db --user=mysql
     
