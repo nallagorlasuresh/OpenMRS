@@ -14,5 +14,5 @@
         state: present
     - name: Creating MYSQL group
       group:
-        name: {{ mysql.username }}
+        name: "{{ mysql.username }}"
         state: present
