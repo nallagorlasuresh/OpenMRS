@@ -16,3 +16,7 @@
       group:
         name: "{{ mysql_username }}"
         state: present
+    - name: Add mysql user with mysql group
+      ansible.builtin.user:
+        name: "{{ mysql_username }}"
+        group: admin
