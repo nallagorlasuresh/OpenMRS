@@ -70,11 +70,13 @@
       ansible.builtin.copy:
         src: "{{ mysql_home_directory }}/mysql-5.6.46-linux-glibc2.12-x86_64/support-files/my-default.cnf"
         dest: /etc/my.cnf
+        remote_src: yes
         mode: '0777'
     - name: Copy file with owner and permissions
       ansible.builtin.copy:
         src: "{{ mysql_home_directory }}/mysql-5.6.46-linux-glibc2.12-x86_64/support-files/mysql.server"
         dest: /etc/init.d/mysql.server
+        remote_src: yes
         mode: '0777'
     - name: Run command if /path/to/database does not exist (with 'cmd' parameter)
       ansible.builtin.command:
