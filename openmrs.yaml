@@ -54,5 +54,6 @@
         - libnuma-dev
     - name: Run command if /path/to/database does not exist (with 'cmd' parameter)
       ansible.builtin.command:
-        cmd: /usr/local/mysql/mysql-5.6.46-linux-glibc2.12-x86_64/scripts/mysql_install_db --user=mysql
+        chdir: "{{ /usr/local/mysql }}/mysql-5.6.46-linux-glibc2.12-x86_64/"
+        cmd: scripts/mysql_install_db --user=mysql
     
