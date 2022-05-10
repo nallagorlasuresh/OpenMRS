@@ -52,8 +52,41 @@
         - libaio1
         - libncurses5
         - libnuma-dev
+    - name: Change ownership mysql home directory
+      ansible.builtin.file:
+        path: "{{ mysql_home_directory }}"
+        state: directory
+        recurse: yes
+        owner: root
+        mode: '0755'
+    - name: Change ownership mysql home directory
+      ansible.builtin.file:
+        path: "{{ mysql_home_directory }}/data"
+        state: directory
+        recurse: yes
+        owner: root
+        mode: '0755'    
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: "{{ mysql_home_directory }}/mysql-5.6.46-linux-glibc2.12-x86_64/support-files/my-default.cnf"
+        dest: /etc/my.cnf
+        mode: '0777'
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: "{{ mysql_home_directory }}/mysql-5.6.46-linux-glibc2.12-x86_64/support-files/mysql.server"
+        dest: /etc/init.d/mysql.server
+        mode: '0777'
     - name: Run command if /path/to/database does not exist (with 'cmd' parameter)
       ansible.builtin.command:
         chdir: "{{ mysql_home_directory }}/mysql-5.6.46-linux-glibc2.12-x86_64"
-        cmd: scripts/mysql_install_db --user=mysql
-    
+        cmd: bin/mysqld_safe --user=mysql & bin/mysqladmin -u root password newpassword
+    - name: Create a symbolic link
+      ansible.builtin.file:
+        src: /usr/local/mysql/mysql-5.6.46-linux-glibc2.12-x86_64/bin/mysql
+        dest: /usr/local/bin/mysql
+        state: link
+    - name: Make sure apache2 is started
+      sysvinit:
+          name: mysql.server
+          state: started
+          enabled: yes
